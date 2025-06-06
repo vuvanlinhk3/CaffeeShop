@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">CoffeeShop</string>
+    <string name="choice_your_nfavorite_coffee">Chọn\nCà Phê Yêu Thích Của Bạn</string>
+    <string name="get_started">Bắt Đầu</string>
+    <string name="search_anything">Tìm kiếm mọi thứ...</string>
+    <string name="popular_coffee">Cà Phê Phổ Biến</string>
+    <string name="cart">Giỏ Hàng</string>
+    <string name="my_order">Đơn Hàng Của Tôi</string>
+    <string name="profile">Hồ Sơ</string>
+    <string name="enter_your_discount_code">Nhập Mã Giảm Giá Của Bạn</string>
+    <string name="apply">Áp Dụng</string>
+    <string name="reset_password">Đặt Lại Mật Khẩu</string>
+    <string name="email_hint">Nhập Email</string>
+    <string name="password_hint">Mật Khẩu</string>
+    <string name="login_button">Đăng Nhập</string>
+    <string name="register_button">Đăng Ký</string>
+    <string name="to_register">Chưa Có Tài Khoản? Đăng Ký</string>
+    <string name="to_login">Đã Có Tài Khoản? Đăng Nhập</string>
+    <string name="send_reset_link">Gửi Liên Kết Đặt Lại Mật Khẩu</string>
+    <string name="profile_title">Hồ Sơ</string>
+    <string name="uid_label">UID</string>
+    <string name="name_label">Tên</string>
+    <string name="email_label">Email</string>
+    <string name="change_avatar">Thay Đổi Ảnh Đại Diện</string>
+    <string name="save_changes">Lưu Thay Đổi</string>
+    <string name="name_hint">Nhập Tên Của Bạn</string>
+    <string name="update_success">Cập Nhật Thành Công</string>
+    <string name="update_failed">Cập Nhật Thất Bại: %1$s</string>
+    <string name="load_data_failed">Tải Dữ Liệu Thất Bại: %1$s</string>
+    <string name="back_button_desc">Nút Quay Lại</string>
+    <string name="no_user_found">Không Tìm Thấy Người Dùng</string>
+    <string name="no_uid_found">Không Tìm Thấy UID</string>
+    <string name="name_empty_error">Tên Không Được Để Trống</string>
+    <string name="permission_denied">Quyền Truy Cập Bị Từ Chối</string>
+
+<!--    1-->
+    <string name="back">Quay Lại</string>
+    <string name="total">Tổng Cộng</string>
+    <string name="total_tax">Tổng Thuế</string>
+    <string name="delivery">Phí Giao Hàng</string>
+    <string name="subtotal">Tổng Phụ</string>
+    <string name="proceed_to_checkout">Tiến Hành Thanh Toán</string>
+
+<!--    2-->
+    <string name="coffee_size">Kích Thước Cà Phê</string>
+    <string name="small">Nhỏ</string>
+    <string name="medium">Trung</string>
+    <string name="large">Lớn</string>
+    <string name="quantity">Số Lượng</string>
+    <string name="description">Mô Tả</string>
+    <string name="add_to_cart">Thêm Vào Giỏ Hàng</string>
+    <string name="list">Danh Sách</string>
+</resources>
