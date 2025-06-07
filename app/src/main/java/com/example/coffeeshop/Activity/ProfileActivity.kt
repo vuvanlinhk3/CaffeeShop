@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +38,7 @@ class ProfileActivity : AppCompatActivity() {
             checkForChanges()
         }
     }
-
+    private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -45,28 +46,35 @@ class ProfileActivity : AppCompatActivity() {
 
         // Khởi tạo Firebase
         auth = FirebaseAuth.getInstance()
+        firebaseAuth = auth // Nếu bạn muốn dùng biến firebaseAuth riêng
+
         dbRef = FirebaseDatabase.getInstance().getReference("users")
         storage = FirebaseStorage.getInstance()
 
         // Tải dữ liệu người dùng
         loadUserData()
 
-        // Xử lý nút Back
+        // Nút quay lại
         binding.backBtn.setOnClickListener {
-            finish() // Quay lại màn hình trước (SplashActivity hoặc MainActivity)
+            finish()
         }
 
-        // Xử lý nút Thay đổi ảnh đại diện
+        // Đổi avatar
         binding.btnChangeAvatar.setOnClickListener {
             pickImageFromGallery()
         }
 
-        // Xử lý nút Chỉnh sửa tên
+        // Chỉnh sửa tên
         binding.btnEditName.setOnClickListener {
             toggleEditName()
         }
 
-        // Theo dõi thay đổi trong trường tên
+        // Nút đăng xuất
+        binding.button3.setOnClickListener {
+            logout()
+        }
+
+        // Theo dõi thay đổi tên
         binding.etName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -75,7 +83,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
-        // Xử lý nút Lưu thay đổi
+        // Lưu thay đổi
         binding.btnSave.setOnClickListener {
             saveChanges()
         }
@@ -186,4 +194,15 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.update_failed, e.message), Toast.LENGTH_SHORT).show()
             }
     }
+
+    private fun logout() {
+        firebaseAuth.signOut() // ← Đăng xuất khỏi Firebase
+
+        // Chuyển về màn hình đăng nhập hoặc splash
+        val intent = Intent(this, SplashActivity::class.java) // hoặc LoginActivity
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Xóa ngăn xếp backstack
+        startActivity(intent)
+        finish() // Kết thúc activity hiện tại
+    }
+
 }
