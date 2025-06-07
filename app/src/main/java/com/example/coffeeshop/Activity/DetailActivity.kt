@@ -1,22 +1,26 @@
 package com.example.coffeeshop.Activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.IntegerRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.example.coffeeshop.Domain.FavoritesModel
 import com.example.coffeeshop.Domain.ItemsModel
 import com.example.coffeeshop.Helper.ManagmentCart
 import com.example.coffeeshop.R
 import com.example.coffeeshop.databinding.ActivityDetailBinding
 import com.example.coffeeshop.databinding.ActivityItemsListBinding
+import com.google.firebase.database.FirebaseDatabase
 import java.text.NumberFormat
 import java.util.*
 
 class DetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailBinding
+    private var isFavorite = false
     private lateinit var item: ItemsModel
     private lateinit var managmentCart: ManagmentCart
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +33,54 @@ class DetailActivity : AppCompatActivity() {
 
         bundle()
         initSizeList()
+        val database = FirebaseDatabase.getInstance().reference
+        val title = item.title
+        val price = item.price
+        val imageUrl = item.picUrl[0]
+
+// Tạo model
+        val randomId = UUID.randomUUID().toString()
+        val favoriteItem = FavoritesModel(
+            itemId = randomId,
+            title = title,
+            price = price,
+            imageUrl = imageUrl
+        )
+
+        binding.favBtn.setOnClickListener {
+            isFavorite = !isFavorite // Đảo trạng thái
+
+            if (isFavorite) {
+                binding.favBtn.setImageResource(R.drawable.baseline_favorite_24)
+
+                // Ghi vào Firebase
+                val favoriteRef = database.child("favorites").child(randomId)
+                favoriteRef.setValue(favoriteItem)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Thêm thất bại: ${e.message}", Toast.LENGTH_SHORT).show()
+                        isFavorite = false
+                        binding.favBtn.setImageResource(R.drawable.favorite_white)
+                    }
+            } else {
+                binding.favBtn.setImageResource(R.drawable.favorite_white)
+
+                // Xóa khỏi Firebase
+                val favoriteRef = database.child("favorites").child(randomId)
+                favoriteRef.removeValue()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Đã xóa khỏi yêu thích", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Xóa thất bại: ${e.message}", Toast.LENGTH_SHORT).show()
+                        isFavorite = true
+                        binding.favBtn.setImageResource(R.drawable.baseline_favorite_24)
+                    }
+            }
+        }
+
 
     }
 
