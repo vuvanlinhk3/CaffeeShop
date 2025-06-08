@@ -3,6 +3,7 @@ package com.example.coffeeshop.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,12 @@ class MainActivity : AppCompatActivity() {
         initCategory()
         initPopular()
         initBottomMenu()
+        val editTextSearch = findViewById<EditText>(R.id.editTextText)
+        editTextSearch.isFocusable = false // Ngăn bàn phím bật lên
+        editTextSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+        }
     }
     // Hàm mới để tải dữ liệu người dùng
     private fun loadUserData() {

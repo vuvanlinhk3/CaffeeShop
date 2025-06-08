@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDFDFD"
+    android:padding="16dp"
+    tools:context=".Activity.SearchActivity">
+
+    <!-- Nút quay lại -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Quay lại"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <!-- Thanh tìm kiếm -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardSearch"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintEnd_toStartOf="@id/btnSubmitSearch"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Tìm kiếm món hoặc thể loại..."
+            android:textColor="#000"
+            android:textColorHint="#888"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="16dp"
+            android:inputType="text" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Nút tìm kiếm -->
+    <ImageButton
+        android:id="@+id/btnSubmitSearch"
+        android:layout_width="42dp"
+        android:layout_height="52dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Tìm kiếm"
+        android:src="@drawable/search_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <!-- Danh sách thể loại (Category) -->
+    <HorizontalScrollView
+        android:id="@+id/scrollCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/cardSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/layoutCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp" />
+    </HorizontalScrollView>
+
+    <!-- Tiêu đề cà phê nổi bật -->
+    <TextView
+        android:id="@+id/tvFeatured"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cà Phê Nổi Bật"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#222"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/scrollCategory"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Danh sách cà phê nổi bật -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFeaturedCoffee"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvFeatured"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Tiêu đề cà phê phổ biến -->
+    <TextView
+        android:id="@+id/tvPopular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cà Phê Phổ Biến"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#222"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/rvFeaturedCoffee"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Danh sách sản phẩm phổ biến -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCoffeeList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPopular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
