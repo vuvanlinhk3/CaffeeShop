@@ -41,6 +41,10 @@
             android:name=".Activity.ProfileActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".Activity.FavoritesActivity"
+            android:exported="false">
+        </activity>
         <activity android:name=".Activity.MainSplashActivity"
             android:exported="true">
             <intent-filter>
